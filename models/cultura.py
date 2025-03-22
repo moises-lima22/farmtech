@@ -11,7 +11,7 @@ def criar_cultura(tipo, dimensoes):
             "insumo": "potassio",
             "quantidade_insumo": 2,
             "total_area": area,
-            "total_insumo": total_insumo
+            "total_insumo": total_insumo,
         }
     elif tipo.lower() == "milho":
         area = (dimensoes["base"] * dimensoes["altura"]) / 2
@@ -25,5 +25,5 @@ def criar_cultura(tipo, dimensoes):
             "insumo": "nitrogenio",
             "quantidade_insumo": 1,
             "total_area": area,
-            "total_insumo": total_insumo
+            "total_insumo": total_insumo,
         }

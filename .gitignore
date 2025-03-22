@@ -1,1 +1,7 @@
 __pycache__/
+.vscode
+.Rhistory
+.RData
+.env
+.venv
+data
