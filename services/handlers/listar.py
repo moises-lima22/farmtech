@@ -1,4 +1,4 @@
-def listar_culturas(culturas):
+def listar_culturas(culturas, mostrar_rodape: bool = True):
     print("\n========== 🌱 CULTURAS REGISTRADAS ==========\n")
 
     if not culturas:
@@ -6,13 +6,18 @@ def listar_culturas(culturas):
     else:
         for i, c in enumerate(culturas):
             print(
-                f"[{i}] {c['tipo']} - Área: {c['total_area']} m² - Insumo Total: {c['total_insumo']} kg"
+                f"[{i}] {c['tipo'].capitalize():<6} | "
+                f"Área: {c['total_area']:>6.1f} m² | "
+                f"Insumo Total: {c['total_insumo']:>6.1f} kg"
             )
-            print(f"Descrição: {c['descricao']}")
+            print(f"     📝 {c['descricao']}\n")
+
+    if not mostrar_rodape:
+        return
 
     while True:
         escolha = input(
-            "\n──────────────────────────────────────────────────────\n"
+            "────────────────────────────────────────────────────────\n"
             "Digite [0] para voltar ao menu principal ou [1] para encerrar o sistema: "
         ).strip()
         if escolha == "0":
@@ -21,4 +26,4 @@ def listar_culturas(culturas):
             print("Saindo do sistema...")
             exit()
         else:
-            print("Opção inválida. Tente novamente.")
+            print("❌ Opção inválida. Tente novamente.")

@@ -1,13 +1,12 @@
+from services.handlers.listar import listar_culturas
+
+
 def remover_cultura(culturas):
     if not culturas:
         print("Nenhuma cultura cadastrada.")
         return
 
-    for i, c in enumerate(culturas):
-        print(
-            f"[{i}] {c['tipo']} - Área: {c['total_area']} m² - Insumo Total: {c['total_insumo']} kg"
-        )
-        print(f"Descrição: {c['descricao']}")
+    listar_culturas(culturas, mostrar_rodape=False)
 
     while True:
         entrada = input(
