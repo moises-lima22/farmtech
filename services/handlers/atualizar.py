@@ -1,5 +1,8 @@
 from services.handlers.listar import listar_culturas
 from models.cultura import criar_cultura
+from services.utils.solicitar_valor import (
+    solicitar_valor,
+)
 
 
 def atualizar_cultura(culturas):
@@ -23,52 +26,50 @@ def atualizar_cultura(culturas):
                 print("❌ Índice inválido.")
                 continue
 
-            cultura_original = culturas[index]
-            tipo = cultura_original["tipo"]
+            original = culturas[index]
+            tipo = original["tipo"]
             print(f"\n🔄 Atualizando cultura do tipo: {tipo}")
 
             if tipo == "cana":
-                largura = input(f"Largura atual ({cultura_original['largura']} m): ")
-                comprimento = input(
-                    f"Comprimento atual ({cultura_original['comprimento']} m): "
+                larguraNova = solicitar_valor(
+                    f"Largura atual ({original['largura']} m): "
                 )
 
-                largura = (
-                    float(largura) if largura.strip() else cultura_original["largura"]
-                )
-                comprimento = (
-                    float(comprimento)
-                    if comprimento.strip()
-                    else cultura_original["comprimento"]
-                )
-
-                if largura <= 0 or comprimento <= 0:
-                    print("❌ Valores devem ser maiores que zero.")
+                if larguraNova == "x":
                     return
 
-                cultura = criar_cultura(
-                    tipo, {"largura": largura, "comprimento": comprimento}
+                comprimentoNovo = solicitar_valor(
+                    f"Comprimento atual ({original['comprimento']} m): "
+                )
+
+                if comprimentoNovo == "x":
+                    return
+
+                nova_cultura = criar_cultura(
+                    tipo, {"largura": larguraNova, "comprimento": comprimentoNovo}
                 )
 
             else:
-                base = input(f"Base atual ({cultura_original['base']} m): ")
-                altura = input(f"Altura atual ({cultura_original['altura']} m): ")
+                baseNova = solicitar_valor(f"Base atual ({original['base']} m): ")
 
-                base = float(base) if base.strip() else cultura_original["base"]
-                altura = float(altura) if altura.strip() else cultura_original["altura"]
-
-                if base <= 0 or altura <= 0:
-                    print("❌ Valores devem ser maiores que zero.")
+                if baseNova == "x":
                     return
 
-                cultura = criar_cultura(tipo, {"base": base, "altura": altura})
+                alturaNova = solicitar_valor(f"Altura atual ({original['altura']} m): ")
 
-            # Exibe preview
-            print("\n📋 Visualização da cultura atualizada:")
+                if alturaNova == "x":
+                    return
+
+                nova_cultura = criar_cultura(
+                    tipo, {"base": baseNova, "altura": alturaNova}
+                )
+
+            # Exibir preview
+            print("\n📋 Visualização da cultura atualizada:\n")
             print(
-                f"\n{cultura['tipo']} - Área: {cultura['total_area']} m² - Insumo Total: {cultura['total_insumo']} kg"
+                f"{nova_cultura['tipo'].capitalize():<6} | Área: {nova_cultura['total_area']:>6.1f} m² | Insumo Total: {nova_cultura['total_insumo']:>6.1f} kg"
             )
-            print(f"Descrição: {cultura['descricao']}")
+            print(f"     📝 {nova_cultura['descricao']}")
 
             while True:
                 confirmar = input(
@@ -78,7 +79,7 @@ def atualizar_cultura(culturas):
                     print("❌ Atualização cancelada.")
                     return
                 elif confirmar == "s":
-                    culturas[index] = cultura
+                    culturas[index] = nova_cultura
                     print("✅ Cultura atualizada com sucesso.")
                     return
                 elif confirmar == "n":
@@ -86,6 +87,5 @@ def atualizar_cultura(culturas):
                     return
                 else:
                     print("❌ Entrada inválida. Digite 's', 'n' ou 'x'.")
-
         except ValueError:
             print("❌ Entrada inválida. Digite um número válido ou 'x' para voltar.")
