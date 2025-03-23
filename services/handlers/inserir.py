@@ -19,10 +19,11 @@ def solicitar_valor(mensagem):
 def inserir_cultura(culturas):
     while True:
         tipo = input(
-            "\nDigite o tipo de cultura (cana ou milho) ou 'x' para voltar: "
+            "\nDigite o tipo de cultura (cana ou milho) ou 'x' para voltar ao menu principal: "
         ).lower()
+
         if tipo == "x":
-            print("\n🔙 Retornando ao menu principal.")
+            print("🔙 Retornando ao menu principal.")
             return
         if tipo not in ["cana", "milho"]:
             print(
@@ -38,8 +39,7 @@ def inserir_cultura(culturas):
             if comprimento == "x":
                 return
             dados = {"largura": largura, "comprimento": comprimento}
-
-        else:  # milho
+        else:
             base = solicitar_valor("Base da área (m): ")
             if base == "x":
                 return
@@ -54,16 +54,24 @@ def inserir_cultura(culturas):
             print(f"❌ Erro ao criar cultura: {e}")
             return
 
-        print("\n📋 Visualização da cultura a ser registrada:")
+        print("\n📋 Visualização da cultura a ser registrada:\n")
         print(
-            f"\n{cultura['tipo']} - Área: {cultura['total_area']} m² - Insumo Total: {cultura['total_insumo']} kg"
+            f"{cultura['tipo'].capitalize():<6} | "
+            f"Área: {cultura['total_area']:>6.1f} m² | "
+            f"Insumo Total: {cultura['total_insumo']:>6.1f} kg"
         )
-        print(f"Descrição: {cultura['descricao']}")
+        print(f"     📝 {cultura['descricao']}")
 
-        confirmacao = input("\nDeseja salvar esta cultura? (s/n): ").lower()
-        if confirmacao == "s":
-            culturas.append(cultura)
-            print("✅ Cultura registrada com sucesso.")
-        else:
-            print("❌ Registro cancelado.")
-        return
+        while True:
+            confirmacao = input("\nDeseja salvar esta cultura? (s/n): ").lower()
+            if confirmacao == "s":
+                culturas.append(cultura)
+                print("✅ Cultura registrada com sucesso.")
+                return
+            elif confirmacao == "n":
+                print("❌ Registro cancelado.")
+                return
+            else:
+                print(
+                    "❌ Entrada inválida. Digite 's' para salvar ou 'n' para cancelar."
+                )
