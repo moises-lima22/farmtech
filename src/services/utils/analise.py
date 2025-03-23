@@ -3,7 +3,7 @@ import subprocess
 
 def executar_analise_r():
     try:
-        subprocess.run(["Rscript", "r_scripts/analise.R"], check=True)
+        subprocess.run(["Rscript", "src/r_scripts/analise.R"], check=True)
     except subprocess.CalledProcessError as e:
         print("Erro ao executar o script R:", e)
         return

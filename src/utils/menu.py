@@ -3,7 +3,7 @@ import subprocess
 def obter_previsao_clima():
     try:
         resultado = subprocess.run(
-            ["Rscript", "r_scripts/clima.R"],
+            ["Rscript", "src/r_scripts/clima.R"],
             capture_output=True,
             text=True,
             timeout=5

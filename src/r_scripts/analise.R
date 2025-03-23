@@ -53,7 +53,7 @@ exibir_estatisticas <- function(df, tipo) {
 }
 
 # ===== Leitura dos dados =====
-dados <- read_csv("data/culturas.csv", show_col_types = FALSE)
+dados <- read_csv("src/../data/culturas.csv", show_col_types = FALSE)
 
 # ===== Exibição da Tabela =====
 exibir_cabecalho_tabela()

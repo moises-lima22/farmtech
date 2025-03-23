@@ -20,22 +20,30 @@ Sistema desenvolvido em **Python** e **R** para apoiar a agricultura digital. Pe
 ## 📁 Estrutura do Projeto
 
 ```text
-farmtech/
+src/
 ├── main.py
-├── .env
 ├── models/
 │   └── cultura.py
-├── services/
-│   └── manipulador.py
-├── utils/
-│   └── menu.py
 ├── r_scripts/
 │   ├── analise.R
 │   └── clima.R
-├── data/
-│   └── culturas.csv
-├── logs/
-│   └── clima.log
+├── services/
+│   ├── handlers/
+│   │   ├── atualizar.py
+│   │   ├── inserir.py
+│   │   ├── listar.py
+│   │   └── remover.py
+│   └── utils/
+│       ├── analise.py
+│       ├── exportar.py
+│       └── solicitar_valor.py
+├── utils/
+│   ├── limpar_console.py
+│   └── menu.py
+data/
+└── culturas.csv
+logs/
+└── clima.log
 └── README.md
 ```
 
