@@ -1,9 +1,4 @@
-import os
 import subprocess
-
-def limpar_console():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
 
 def obter_previsao_clima():
     try:
@@ -11,7 +6,7 @@ def obter_previsao_clima():
             ["Rscript", "r_scripts/clima.R"],
             capture_output=True,
             text=True,
-            # timeout=5
+            timeout=5
         )
         return resultado.stdout
     except subprocess.TimeoutExpired:
@@ -21,7 +16,6 @@ def obter_previsao_clima():
 
 
 def exibir_menu():
-    limpar_console()
 
     while True:
         print("\n========== SISTEMA DE GESTAO AGRICOLA ==========")
@@ -34,13 +28,15 @@ def exibir_menu():
         print("5. Encerrar sistema")
         print("6. Exportar relatorio em CSV")
         print("7. Executar analise estatistica (R)")
+        print("8. Limpar")
+        print("================================================")
 
         try:
             opcao = int(input("\nEscolha uma opcao: "))
-            if opcao in range(1, 8):
+            if opcao in range(1, 9):
                 return opcao
             else:
                 print("❌ Opcao fora do intervalo permitido. Tente novamente.")
         except ValueError:
-            print("❌ Entrada inválida. Por favor, digite um número inteiro de 1 a 7.")
+            print("❌ Entrada inválida. Por favor, digite um número inteiro de 1 a 8.")
 
