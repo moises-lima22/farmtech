@@ -4,7 +4,11 @@ def criar_cultura(tipo, dimensoes):
         total_insumo = area * 2
         return {
             "tipo": "cana",
-            "descricao": "Cultura de cana-de-acucar com aplicacao de potassio por metro quadrado.",
+            "descricao": (
+                "Plantio de cana-de-açúcar em área retangular com aplicação de potássio "
+                "à razão de 2 kg por metro quadrado, visando o fortalecimento radicular "
+                "e o desenvolvimento inicial da cultura."
+            ),
             "formato_area": "retangulo",
             "largura": dimensoes["largura"],
             "comprimento": dimensoes["comprimento"],
@@ -18,7 +22,11 @@ def criar_cultura(tipo, dimensoes):
         total_insumo = area * 1
         return {
             "tipo": "milho",
-            "descricao": "Cultura de milho em area triangular com aplicacao de nitrogenio.",
+            "descricao": (
+                "Plantio de milho em área triangular com aplicação de nitrogênio "
+                "na proporção de 1 kg por metro quadrado, promovendo o crescimento "
+                "vegetativo e a produtividade da lavoura."
+            ),
             "formato_area": "triangulo",
             "base": dimensoes["base"],
             "altura": dimensoes["altura"],
