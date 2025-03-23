@@ -1,10 +1,13 @@
 import csv
-
+import os
 
 def exportar_para_csv(culturas):
     if not culturas:
         print("\nNenhum dado para exportar.")
         return
+
+    # Garante que a pasta 'data/' exista
+    os.makedirs("data", exist_ok=True)
 
     campos = [
         "tipo",
@@ -20,9 +23,7 @@ def exportar_para_csv(culturas):
         "total_insumo",
     ]
 
-    with open(
-        "data/culturas.csv", mode="w", newline="", encoding="utf-8"
-    ) as arquivo_csv:
+    with open("data/culturas.csv", mode="w", newline="", encoding="utf-8") as arquivo_csv:
         escritor = csv.DictWriter(arquivo_csv, fieldnames=campos)
         escritor.writeheader()
         for cultura in culturas:
