@@ -1,6 +1,21 @@
 from models.cultura import criar_cultura
 
 
+def solicitar_valor(mensagem):
+    while True:
+        entrada = input(mensagem).strip().lower()
+        if entrada == "x":
+            return "x"
+        try:
+            valor = float(entrada)
+            if valor > 0:
+                return valor
+            else:
+                print("❌ O valor deve ser maior que zero.")
+        except ValueError:
+            print("❌ Entrada inválida. Digite um número válido ou 'x' para voltar.")
+
+
 def inserir_cultura(culturas):
     while True:
         tipo = input(
@@ -9,30 +24,34 @@ def inserir_cultura(culturas):
         if tipo == "x":
             print("\n🔙 Retornando ao menu principal.")
             return
-
         if tipo not in ["cana", "milho"]:
-            print("❌ Tipo de cultura inválido!")
+            print(
+                "❌ Tipo de cultura inválido! Tente novamente ou digite 'x' para voltar."
+            )
             continue
 
+        if tipo == "cana":
+            largura = solicitar_valor("Largura da área (m): ")
+            if largura == "x":
+                return
+            comprimento = solicitar_valor("Comprimento da área (m): ")
+            if comprimento == "x":
+                return
+            dados = {"largura": largura, "comprimento": comprimento}
+
+        else:  # milho
+            base = solicitar_valor("Base da área (m): ")
+            if base == "x":
+                return
+            altura = solicitar_valor("Altura da área (m): ")
+            if altura == "x":
+                return
+            dados = {"base": base, "altura": altura}
+
         try:
-            if tipo == "cana":
-                largura = float(input("Largura da área (m): "))
-                comprimento = float(input("Comprimento da área (m): "))
-                if largura <= 0 or comprimento <= 0:
-                    print("❌ Valores devem ser maiores que zero.")
-                    return
-                cultura = criar_cultura(
-                    tipo, {"largura": largura, "comprimento": comprimento}
-                )
-            else:
-                base = float(input("Base da área (m): "))
-                altura = float(input("Altura da área (m): "))
-                if base <= 0 or altura <= 0:
-                    print("❌ Valores devem ser maiores que zero.")
-                    return
-                cultura = criar_cultura(tipo, {"base": base, "altura": altura})
-        except ValueError:
-            print("❌ Entrada inválida. Operação cancelada.")
+            cultura = criar_cultura(tipo, dados)
+        except Exception as e:
+            print(f"❌ Erro ao criar cultura: {e}")
             return
 
         print("\n📋 Visualização da cultura a ser registrada:")
