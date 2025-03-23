@@ -15,7 +15,7 @@ log_erro <- function(mensagem) {
 env_path <- file.path(getwd(), ".env")
 
 if (!file.exists(env_path)) {
-  msg <- "Arquivo .env nao encontrado."
+  msg <- "Arquivo .env nao encontrado. Mais informações em README.md."
   cat("⚠️ ", msg, "\n")
   log_erro(msg)
   quit()
